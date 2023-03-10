@@ -60,7 +60,7 @@ function sendJSONXMLHTTPRequest(url, objects, callback) {
     xhr.open('POST', url, true);
     xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
     xhr.responseType = 'json';
-    xhr.send(objects);
+    xhr.send(JSON.stringify(objects));
 }
 
 
@@ -151,7 +151,7 @@ function addEntity(entity, data) {
     //XXX: Send a XHTML Request that updates the entity you just  modified!
     var url = "/entity/"+entity
 
-    sendJSONXMLHTTPRequest(url, data, drawCircle(context, data)); 
+    sendJSONXMLHTTPRequest(url, data); 
 
 }
 

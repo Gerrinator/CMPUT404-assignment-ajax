@@ -79,17 +79,9 @@ def hello():
 @app.route("/entity/<entity>", methods=['POST','PUT'])
 def update(entity):
     '''update the entities via this interface'''
-    if request.method == "POST":
-        jsonFile = request.get_json()
-        data = flask_post_json()
-        myWorld.set(entity, data)
-        return myWorld.get(entity)
-
-    elif request.method == "PUT":
-        jsonFile = request.get_json()
-        data = flask_post_json()
-        myWorld.set(entity, data)
-        return myWorld.get(entity)
+    data = flask_post_json()
+    myWorld.set(entity, data)
+    return myWorld.get(entity)
 
 @app.route("/world", methods=['POST','GET'])    
 def world():
