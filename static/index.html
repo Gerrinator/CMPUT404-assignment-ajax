@@ -32,8 +32,6 @@ var W = canvas.width  = window.innerWidth-6;
 var H = canvas.height = window.innerHeight-50;
 
 
-
-
 function sendJSONXMLHTTPRequest(url, objects, callback) {
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
@@ -294,6 +292,9 @@ function update() {
             xhr.onload = function() {
                 let responsObj = xhr.response;
                 const data = JSON.parse(responsObj);
+                if (world != data){
+                    drawNextFrame();
+                }
                 world = data;
             }
         }
