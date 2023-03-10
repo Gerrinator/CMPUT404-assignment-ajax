@@ -32,6 +32,8 @@ var W = canvas.width  = window.innerWidth-6;
 var H = canvas.height = window.innerHeight-50;
 
 
+
+
 function sendJSONXMLHTTPRequest(url, objects, callback) {
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
@@ -74,10 +76,18 @@ function drawCircle(context,entity) {
         var x = entity["x"];
         var y = entity["y"];
         //moveTo(x,y);
-        fillStyle = entity["colour"];
+
+        fillStyle = createRadialGradient(x, y, entity["radius"]/3, x, y, entity["radius"]);
+        fillStyle.addColorStop(0, entity["colour"]);
+        fillStyle.addColorStop(1, "transparent");
+
+        //fillStyle = entity["colour"];
         strokeStyle = fillStyle;
+
         arc(x, y, (entity["radius"])?entity["radius"]:50, 0, 2.0 * Math.PI, false);  
-        stroke();                                
+        //fillRect(x, y, 10, 10);
+        //stroke();              
+        fill();      
     }
 }
 
@@ -261,11 +271,11 @@ mouse = (function() {
 // Add the application specific mouse listeners!
 //XXX: TODO Make these prettier!
 mouse.mousedowners.push(function(x,y,clicked,e) {
-    addEntityWithoutName({'x':x,'y':y,'colour':'blue'});
+    addEntityWithoutName({'x':x,'y':y,'colour':'#00ff00', 'radius':11});
 });
 
 mouse.mouseuppers.push(function(x,y,clicked,e) {
-    addEntityWithoutName({'x':x,'y':y,'colour':'red'});
+    addEntityWithoutName({'x':x,'y':y,'colour':'#00ff00', 'radius':11});
 });
 
 mouse.mousedraggers.push(function(x,y,clicked,e) {
